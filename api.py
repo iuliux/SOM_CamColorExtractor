@@ -22,7 +22,7 @@ class ColorsExtractor(Resource):
     dataUrlPattern = re.compile('data:image/(png|jpeg);base64,(.*)$')
 
     def get(self):
-        return 'Use PUT to send image'
+        return flask.render_template('index.html')
 
     def post(self):
         args = parser.parse_args()
