@@ -59,4 +59,4 @@ class ColorsExtractor(Resource):
 api.add_resource(ColorsExtractor, '/colors')
 
 if __name__ == '__main__':
-    app.run(debug=True, port=port)
+    app.run(debug=True, host='0.0.0.0', port=port)
