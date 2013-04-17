@@ -8,7 +8,7 @@ import numpy as np
 
 from som.som_segmentation import *
 
-from flask import Flask, jsonify
+from flask import Flask, jsonify, render_template
 from flask.ext.restful import reqparse, abort, Api, Resource
 
 app = Flask(__name__)
@@ -23,7 +23,7 @@ class ColorsExtractor(Resource):
     dataUrlPattern = re.compile('data:image/(png|jpeg);base64,(.*)$')
 
     def get(self):
-        return flask.render_template('index.html')
+        return 'Use PUT to send image'
 
     def post(self):
         args = parser.parse_args()
@@ -63,6 +63,11 @@ class ColorsExtractor(Resource):
         return jsonify(colors=results)
 
 api.add_resource(ColorsExtractor, '/colors')
+
+
+@app.route('/')
+def index():
+    return render_template('index.html')
 
 if __name__ == '__main__':
     app.run(debug=True, host='0.0.0.0', port=port)

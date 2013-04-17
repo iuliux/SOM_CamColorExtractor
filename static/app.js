@@ -20,7 +20,7 @@ jQuery.extend({
     var cameraCanvas = document.getElementById("cam");
     var capturing = false;
     var overlay = new Image();
-    overlay.src = "images/overlay.png";
+    overlay.src = "/static/overlay.png";
 
     DEBUG = document.getElementById("debug");
 
@@ -38,10 +38,8 @@ jQuery.extend({
     };
 
     var resultCallback = function(result) {
-        // FIXME: not working
-        alert("aaaa");
-        // DEBUG.innerHTML = result;
-        $('#debug').text(result.value);
+        DEBUG.innerHTML = result['colors'];
+        // TODO: Display colors
     };
 
     camera.init({
@@ -93,6 +91,8 @@ jQuery.extend({
                 drawOverlay(cameraCanvas, overlay);
                 drawOverlay(cameraCanvas, overlay);
                 drawOverlay(cameraCanvas, overlay);
+
+                // TODO: Show some 'waiting' animation
 
                 // Send data to server
                 $.post('colors',
