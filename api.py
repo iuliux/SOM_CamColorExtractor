@@ -1,4 +1,5 @@
 import os
+import logging
 import re
 import base64
 import cStringIO
@@ -26,7 +27,7 @@ class ColorsExtractor(Resource):
 
     def post(self):
         args = parser.parse_args()
-        print 'Received:', args['img'][:35]
+        logging.info('Received:' + str(args['img'][:35]))
 
         imgb64 = self.dataUrlPattern.match(args['img'])
         try:
@@ -47,17 +48,17 @@ class ColorsExtractor(Resource):
         WR, WG, WB = som_train(pixels, 2)
 
         color_scores = som_score_colors(pixels, WR, WG, WB)
-        print 'Scores:', color_scores
+        logging.info('Scores:' + str(color_scores))
 
         d = {v: i for i, v in enumerate(color_scores)}
         color_scores.sort()
 
         idx = d[color_scores[-1]]
         results = [WR[0, idx] * 255, WG[0, idx] * 255, WB[0, idx] * 255]
-        print 'Color 1:', idx, WR[0, idx] * 255, WG[0, idx] * 255, WB[0, idx] * 255
+        logging.warning(('Color 1:', idx, WR[0, idx] * 255, WG[0, idx] * 255, WB[0, idx] * 255))
         idx = d[color_scores[-2]]
         results.extend([WR[0, idx] * 255, WG[0, idx] * 255, WB[0, idx] * 255])
-        print 'Color 2:', idx, WR[0, idx] * 255, WG[0, idx] * 255, WB[0, idx] * 255
+        logging.warning(('Color 2:', idx, WR[0, idx] * 255, WG[0, idx] * 255, WB[0, idx] * 255))
 
         return jsonify(colors=results)
 
