@@ -1,0 +1,11 @@
+Flask==0.9
+Flask-RESTful==0.2.1
+Jinja2==2.6
+Werkzeug==0.8.3
+argparse==1.2.1
+distribute==0.6.31
+gunicorn==0.17.2
+numpy==1.7.1
+pycrypto==2.6
+wsgiref==0.1.2
+git+git://github.com/errkk/gitpil.git#egg=PIL
