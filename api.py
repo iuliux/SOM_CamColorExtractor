@@ -64,7 +64,7 @@ class ColorsExtractor(Resource):
                         int(WG[0, idx] * 255),
                         int(WB[0, idx] * 255)])
 
-        logging.warning(('Colors:', results)
+        logging.warning(('Colors:', results))
 
         return jsonify(colors=results)
 
