@@ -1,0 +1,29 @@
+<!doctype html>
+<html>
+<head>
+	<title>dresser camera</title>
+	<meta charset="utf-8" />
+ 	<link rel="stylesheet" href="css/main.css"/>
+ 	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+</head>
+<body>
+	<h1 id="info">Please allow this page to access your camera.</h1>
+
+	<div id="notSupported">
+		<h1>Your browser does not support the Camera API.</h1>
+	</div>
+
+	<canvas id="cam"></canvas>
+	<div id="buttons">
+		<button id="shoot">Shoot</button>
+
+		<button id="send">Send</button>
+		<button id="retry">Retry</button>
+	</div>
+
+	<div id="debug"></div>
+
+	<script src="script/camera.js"></script>
+	<script src="script/app.js"></script>
+</body>
+</html>
