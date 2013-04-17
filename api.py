@@ -53,12 +53,18 @@ class ColorsExtractor(Resource):
         d = {v: i for i, v in enumerate(color_scores)}
         color_scores.sort()
 
+        # Add color 1
         idx = d[color_scores[-1]]
-        results = [WR[0, idx] * 255, WG[0, idx] * 255, WB[0, idx] * 255]
-        logging.warning(('Color 1:', idx, WR[0, idx] * 255, WG[0, idx] * 255, WB[0, idx] * 255))
+        results = [int(WR[0, idx] * 255),
+                   int(WG[0, idx] * 255),
+                   int(WB[0, idx] * 255)]
+        # Add color 2
         idx = d[color_scores[-2]]
-        results.extend([WR[0, idx] * 255, WG[0, idx] * 255, WB[0, idx] * 255])
-        logging.warning(('Color 2:', idx, WR[0, idx] * 255, WG[0, idx] * 255, WB[0, idx] * 255))
+        results.extend([int(WR[0, idx] * 255),
+                        int(WG[0, idx] * 255),
+                        int(WB[0, idx] * 255)])
+
+        logging.warning(('Colors:', results)
 
         return jsonify(colors=results)
 
