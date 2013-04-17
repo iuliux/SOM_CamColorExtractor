@@ -1,3 +1,4 @@
+import os
 import re
 import base64
 import cStringIO
@@ -11,6 +12,7 @@ from flask.ext.restful import reqparse, abort, Api, Resource
 
 app = Flask(__name__)
 api = Api(app)
+port = int(os.environ.get('PORT', 5000))
 
 parser = reqparse.RequestParser()
 parser.add_argument('img', type=str)
@@ -57,4 +59,4 @@ class ColorsExtractor(Resource):
 api.add_resource(ColorsExtractor, '/colors')
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run(debug=True, port=port)
