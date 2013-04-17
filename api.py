@@ -7,7 +7,7 @@ import numpy as np
 
 from som.som_segmentation import *
 
-from flask import Flask
+from flask import Flask, jsonify
 from flask.ext.restful import reqparse, abort, Api, Resource
 
 app = Flask(__name__)
@@ -51,10 +51,15 @@ class ColorsExtractor(Resource):
 
         d = {v: i for i, v in enumerate(color_scores)}
         color_scores.sort()
-        print 'Color 1:', d[color_scores[-1]], WR[0, d[color_scores[-1]]] * 255, WG[0, d[color_scores[-1]]] * 255, WB[0, d[color_scores[-1]]] * 255
-        print 'Color 2:', d[color_scores[-2]], WR[0, d[color_scores[-2]]] * 255, WG[0, d[color_scores[-2]]] * 255, WB[0, d[color_scores[-2]]] * 255
 
-        return 'color1', 201
+        idx = d[color_scores[-1]]
+        results = [WR[0, idx] * 255, WG[0, idx] * 255, WB[0, idx] * 255]
+        print 'Color 1:', idx, WR[0, idx] * 255, WG[0, idx] * 255, WB[0, idx] * 255
+        idx = d[color_scores[-2]]
+        results.extend([WR[0, idx] * 255, WG[0, idx] * 255, WB[0, idx] * 255])
+        print 'Color 2:', idx, WR[0, idx] * 255, WG[0, idx] * 255, WB[0, idx] * 255
+
+        return jsonify(colors=results)
 
 api.add_resource(ColorsExtractor, '/colors')
 
