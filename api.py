@@ -55,14 +55,15 @@ class ColorsExtractor(Resource):
 
         # Add color 1
         idx = d[color_scores[-1]]
-        results = [int(WR[0, idx] * 255),
-                   int(WG[0, idx] * 255),
-                   int(WB[0, idx] * 255)]
+        results = [WR[0, idx],
+                   WG[0, idx],
+                   WB[0, idx]]
         # Add color 2
         idx = d[color_scores[-2]]
-        results.extend([int(WR[0, idx] * 255),
-                        int(WG[0, idx] * 255),
-                        int(WB[0, idx] * 255)])
+        results.extend([WR[0, idx],
+                        WG[0, idx],
+                        WB[0, idx]])
+        results = map(lambda x: int(x * 255), results)
 
         logging.warning(('Colors:', results))
 
