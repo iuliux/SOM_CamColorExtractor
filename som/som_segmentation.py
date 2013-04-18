@@ -4,8 +4,13 @@
 from learning_rate import *
 from radius import *
 from neighbourhood import *
+from brightness import *
 
 import numpy as np
+
+
+LOWER_BOUND = 0.2
+UPPER_BOUND = 0.7
 
 
 def euclidian(x1, y1, z1, x2, y2, z2):
@@ -47,10 +52,13 @@ def som_train(img_pixels, n, max_iters=3000, thresh=0.001):
         # Generate neighbouring mask used to only influence the neighbours
         neigh = neighbourhood(choosen_x, choosen_y, rad, n, n)
 
+        # Compute an aditional weight which favours medium-bright colors
+        bright_w = brightness_score(*pick_rgb)
+
         # Compute deltas
-        deltaR = eta * neigh * (pick_rgb[0] - WR)
-        deltaG = eta * neigh * (pick_rgb[1] - WG)
-        deltaB = eta * neigh * (pick_rgb[2] - WB)
+        deltaR = eta * neigh * bright_w * (pick_rgb[0] - WR)
+        deltaG = eta * neigh * bright_w * (pick_rgb[1] - WG)
+        deltaB = eta * neigh * bright_w * (pick_rgb[2] - WB)
 
         # Update weights
         WR += deltaR
@@ -75,11 +83,11 @@ def som_score_colors(orig_pixels, WR, WG, WB):
     scores = [0] * WR.size
 
     for i, px in enumerate(orig_pixels):
-        # Skip black pixels
-        if px[0] < .01 and px[1] < .01 and px[2] < .01:
+        # Skip dark pixels
+        if px[0] < LOWER_BOUND and px[1] < LOWER_BOUND and px[2] < LOWER_BOUND:
             continue
-        # And white ones
-        if px[0] > .95 and px[1] > .95 and px[2] > .95:
+        # And bright ones
+        if px[0] > UPPER_BOUND and px[1] > UPPER_BOUND and px[2] > UPPER_BOUND:
             continue
 
         dists = euclidian(WR, WG, WB, *px)
