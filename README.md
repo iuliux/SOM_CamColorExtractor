@@ -1,8 +1,11 @@
-Main colors extractor using SOM
-===============================
+Main colors extractor using SelfOrganizingMap
+=============================================
 
 Applies segmentation effect to an image with the specified number of colors and
 extracts the best 2.
+
+Flask app with HTML5 + Javascipt (using Camera API) frontend and Python
+implementation of SOM.
 
 Live Demo
 ---------
