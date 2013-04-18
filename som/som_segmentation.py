@@ -17,7 +17,7 @@ def euclidian(x1, y1, z1, x2, y2, z2):
     return np.sqrt((x1 - x2)**2 + (y1 - y2)**2 + (z1 - z2)**2)
 
 
-def som_train(img_pixels, n, max_iters=3000, thresh=0.001):
+def som_train(img_pixels, n, max_iters=3500, thresh=0.001):
     '''
     Learns the SOM and returns resulted n^2 cluster centroids, as 3 1D arrays:
         (R, G, B)

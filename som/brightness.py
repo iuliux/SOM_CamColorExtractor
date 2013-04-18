@@ -16,7 +16,7 @@ def brightness_score(r, g, b):
     # from math import sqrt
     # x = sqrt(0.241 * r**2 + 0.691 * g**2 + 0.068 * b**2)
 
-    return (-4 * x**2 + 4 * x)**3
+    return (-4 * x**2 + 4 * x)
 
 
 if __name__ == '__main__':
