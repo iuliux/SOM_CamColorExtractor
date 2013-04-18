@@ -24,6 +24,13 @@ jQuery.extend({
 
     DEBUG = document.getElementById("debug");
 
+    var rgbToHex = function(r, g, b) {
+        if(r < 0 || r > 255) alert("r is out of bounds; "+r);
+        if(g < 0 || g > 255) alert("g is out of bounds; "+g);
+        if(b < 0 || b > 255) alert("b is out of bounds; "+b);
+        return "#" + ((1 << 24) + (r << 16) + (g << 8) + b).toString(16).slice(1,7);
+    };
+
     var mirrorCanvas = function(canvas){
         var ctx = canvas.getContext("2d");
         ctx.translate(canvas.width, 0);
@@ -38,8 +45,14 @@ jQuery.extend({
     };
 
     var resultCallback = function(result) {
-        DEBUG.innerHTML = result['colors'];
-        // TODO: Display colors
+        colors = result['colors'];
+        // Display colors
+        var hexColor1 = rgbToHex(colors[0], colors[1], colors[2]);
+        var hexColor2 = rgbToHex(colors[3], colors[4], colors[5]);
+        $('#box1').css('background-color', hexColor1);
+        $('#box2').css('background-color', hexColor2);
+
+        // DEBUG.innerHTML = hexColor1 + ' | ' + hexColor2;
     };
 
     camera.init({

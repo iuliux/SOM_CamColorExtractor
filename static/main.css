@@ -50,3 +50,19 @@ h1 {
 	font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
 	font-size: 18px;
 }
+
+.color-box {
+	position: absolute;
+	border: 1px solid #000;
+	width: 30px;
+	height: 30px;
+	left: 20px;
+}
+
+#box1 {
+	top: 20px;
+}
+
+#box2 {
+	top: 70px;
+}
