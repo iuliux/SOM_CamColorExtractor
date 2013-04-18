@@ -36,3 +36,9 @@ Conclusion
 ----------
 
 It is a toy.
+
+References
+----------
+
+Based on [SOM_Posterizer](https://github.com/iuliux/SOM_Posterizer)  
+Uses [Camera.js](https://github.com/idevelop/camera.js)
