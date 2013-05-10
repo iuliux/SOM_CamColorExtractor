@@ -15,7 +15,7 @@ Live Demo
 You have to trust me that no picture of you will ever be saved anywhere when
 using this demo.
 
-As far as I know, it works on `Google Chrome`, `Opera`, `Opera Mobile`.
+As far as I know, it works on `Google Chrome`, `Firefox`, `IE`, `Opera`, `Opera Mobile`.
 
 Implementation details
 ----------------------
